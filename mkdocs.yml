@@ -1,0 +1,22 @@
+site_name: Gear Generator
+site_url: https://docs.technomyth.com/gear-generator/
+repo_url: https://github.com/TechnoMyth/gear-generator
+site_description: Procedural gears, gear trains and planetary gear sets for Unreal Engine
+copyright: Copyright TechnoMyth
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - toc.follow
+    - search.highlight
+  palette:
+    - scheme: slate
+      primary: amber
+      accent: deep orange
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+nav:
+  - User guide: index.md
