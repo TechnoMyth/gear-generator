@@ -37,6 +37,10 @@ Distances are in Unreal units (centimetres) and angles in degrees.
    everything below applies to both.
 3. Select it and set the shape in the Details panel's **Gear** section. The gear regenerates as you edit.
 
+![The Gear Generator category in the Place Actors panel](Images/PlaceActors.png)
+
+![A driven gear's Gear and Gear Train settings in the Details panel](Images/DetailsPanel.png)
+
 A gear's own rotation is never changed while it turns: it is drawn by an internal mesh component that turns inside
 it. Place and rotate the gear actor freely; to turn something with the gear, attach it to the gear's socket (see
 [Attaching things to gears](#attaching-things-to-gears)).
@@ -102,6 +106,10 @@ These apply to Spokes and Spoked Gear.
 If the settings can't make a valid shape, for example a hole with a negative radius, the gear shows a **Problems**
 line in the Details panel saying which setting to change, and Map Check lists it as an error. The usual causes:
 
+![A Problems line for a gear with a Base of zero](Images/Problems.png)
+
+- **"Base must be greater than zero"**: with no base, the tooth gaps reach the hole (or a ring gear's outer edge)
+  and the teeth come apart.
 - **"Radius - Dedendum - Base must be greater than zero"**: the teeth and base leave no room for the hole. Reduce
   Base or Dedendum, or increase Radius.
 - **"Base is too small for this ConicalAngle"**: the cone thins the rim towards the far face until it vanishes.
@@ -240,6 +248,8 @@ re-phased to mesh with the new driver, and anything on its socket turns with the
 
 A gear generates its mesh when it's created. That's convenient while you edit, but costs time when a level loads,
 so for shipping, gears should be **baked**: saved as static mesh assets that load like any other.
+
+![The Gear Generator section of the Tools menu](Images/ToolsMenu.png)
 
 - **Tools > Gear Generator > Bake All Gears in Level** bakes every gear that isn't baked or is out of date.
 - **Bake Selected Gears**, the right-click **Bake Gears** entry, and the **Bake** button in a gear's Details panel
