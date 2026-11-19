@@ -8,16 +8,12 @@ import shutil
 import sys
 
 here = os.path.dirname(os.path.abspath(__file__))
-plugin = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, "..", "..", "Plugins", "GearGenerator")
+plugin = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, "..", "PluginDev", "Plugins", "GearGenerator")
 source = os.path.join(plugin, "Docs")
 target = os.path.join(here, "docs")
-# The custom domain file belongs to the site, not the guide
-cname_path = os.path.join(target, "CNAME")
-cname = open(cname_path, encoding="utf-8").read() if os.path.isfile(cname_path) else None
+if not os.path.isfile(os.path.join(source, "index.md")):
+    sys.exit(f"No guide found at {source}")
 if os.path.isdir(target):
     shutil.rmtree(target)
 shutil.copytree(source, target)
-if cname is not None:
-    with open(cname_path, "w", encoding="utf-8") as file:
-        file.write(cname)
 print(f"Copied {source} to {target}")
