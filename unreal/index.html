@@ -1,0 +1,1779 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Procedural gears, gear trains and planetary gear sets for game engines">
+      
+      
+      
+        <link rel="canonical" href="https://docs.technomyth.com/gear-generator/unreal/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Unreal Engine - Gear Generator</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gear-generator-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Gear Generator" class="md-header__button md-logo" aria-label="Gear Generator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gear Generator
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unreal Engine
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="deep-orange"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TechnoMyth/gear-generator" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Gear Generator" class="md-nav__button md-logo" aria-label="Gear Generator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gear Generator
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TechnoMyth/gear-generator" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unreal Engine
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unreal Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gear-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear shapes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gear shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gear-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spoke-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spoke options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-shape-cant-be-generated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a shape can't be generated
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-gears-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Making gears mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gear-trains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear trains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gear trains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drivers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#driven-gears" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Driven gears
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linking-gears-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linking gears automatically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking links
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planetary-gear-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planetary gear sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attaching-things-to-gears" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching things to gears
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Baking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Baking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unbaked-gears-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unbaked gears at runtime
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-and-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blueprint and C++
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blueprint and C++">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gear-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear component
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planetary-gear-actor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planetary gear actor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-gear-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The gear material
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-showcase-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Showcase map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version history
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gear-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear shapes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gear shapes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gear-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spoke-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spoke options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-shape-cant-be-generated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a shape can't be generated
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-gears-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Making gears mesh
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gear-trains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear trains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gear trains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drivers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#driven-gears" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Driven gears
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linking-gears-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linking gears automatically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking links
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planetary-gear-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planetary gear sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attaching-things-to-gears" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching things to gears
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Baking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Baking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unbaked-gears-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unbaked gears at runtime
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-and-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blueprint and C++
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blueprint and C++">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gear-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gear component
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planetary-gear-actor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planetary gear actor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-gear-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The gear material
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-showcase-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Showcase map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version history
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="gear-generator-user-guide">Gear Generator user guide<a class="headerlink" href="#gear-generator-user-guide" title="Permanent link">&para;</a></h1>
+<p>Gear Generator makes gears procedurally in Unreal Engine 5.6 to 5.8. This guide covers placing and shaping gears,
+linking them into trains, planetary gear sets, attaching things to gears, baking for shipping, the settings, the
+Blueprint and C++ API, the included material, and the Showcase map.</p>
+<p>Distances are in Unreal units (centimetres) and angles in degrees.</p>
+<p><img alt="The Showcase map's skeleton clock: an eight-gear train turning the hour, minute and seconds hands" src="Images/Clock.jpg" /></p>
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#gear-shapes">Gear shapes</a></li>
+<li><a href="#making-gears-mesh">Making gears mesh</a></li>
+<li><a href="#gear-trains">Gear trains</a></li>
+<li><a href="#planetary-gear-sets">Planetary gear sets</a></li>
+<li><a href="#attaching-things-to-gears">Attaching things to gears</a></li>
+<li><a href="#baking">Baking</a></li>
+<li><a href="#project-settings">Project settings</a></li>
+<li><a href="#blueprint-and-c">Blueprint and C++</a></li>
+<li><a href="#the-gear-material">The gear material</a></li>
+<li><a href="#the-showcase-map">The Showcase map</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#version-history">Version history</a></li>
+</ul>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Copy the <code>GearGenerator</code> folder into your project's <code>Plugins</code> folder, or install it from Fab. Enable
+   <strong>Gear Generator</strong> in <strong>Edit &gt; Plugins</strong> and restart the editor. It enables <strong>Geometry Script</strong>, which it uses
+   to build meshes.</li>
+<li>Place a <strong>Gear Actor</strong> from the <strong>Gear Generator</strong> category of the <strong>Place Actors</strong> panel, which also has the
+   <strong>Planetary Gear Actor</strong>. To give an existing actor or Blueprint a gear, add a <strong>Gear</strong> component instead;
+   everything below applies to both.</li>
+<li>Select it and set the shape in the Details panel's <strong>Gear</strong> section. The gear regenerates as you edit.</li>
+</ol>
+<p><img alt="The Gear Generator category in the Place Actors panel" src="Images/PlaceActors.png" /></p>
+<p><img alt="A driven gear's Gear and Gear Train settings in the Details panel" src="Images/DetailsPanel.png" /></p>
+<p>A gear's own rotation is never changed while it turns: it is drawn by an internal mesh component that turns inside
+it. Place and rotate the gear actor freely; to turn something with the gear, attach it to the gear's socket (see
+<a href="#attaching-things-to-gears">Attaching things to gears</a>).</p>
+<h2 id="gear-shapes">Gear shapes<a class="headerlink" href="#gear-shapes" title="Permanent link">&para;</a></h2>
+<p><img alt="One of each shape and style: spur, spoked, ring, spokes, skewed, conical, and few deep teeth" src="Images/Gallery.jpg" /></p>
+<p><strong>Type</strong> chooses the shape:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it makes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gear</strong></td>
+<td>A spur gear with a hole in the middle</td>
+</tr>
+<tr>
+<td><strong>Ring Gear</strong></td>
+<td>An internal gear: teeth on the inside of a ring. Gears turn inside it</td>
+</tr>
+<tr>
+<td><strong>Spoked Gear</strong></td>
+<td>A gear rim joined to a hub by spokes</td>
+</tr>
+<tr>
+<td><strong>Spokes</strong></td>
+<td>A hub and spokes with no teeth, e.g. a carrier arm or a wheel</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gear-options">Gear options<a class="headerlink" href="#gear-options" title="Permanent link">&para;</a></h3>
+<p>These apply to Gear, Ring Gear and Spoked Gear.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radius</strong></td>
+<td>Pitch radius: where the teeth of two meshing gears touch. For a ring gear, the radius of its teeth's pitch circle</td>
+</tr>
+<tr>
+<td><strong>Number Of Teeth</strong></td>
+<td>1 to 4096</td>
+</tr>
+<tr>
+<td><strong>Thickness</strong></td>
+<td>Depth of the gear along its axis</td>
+</tr>
+<tr>
+<td><strong>Addendum</strong></td>
+<td>How far the teeth reach beyond the pitch radius</td>
+</tr>
+<tr>
+<td><strong>Dedendum</strong></td>
+<td>How far the gaps between teeth go inside the pitch radius</td>
+</tr>
+<tr>
+<td><strong>Base</strong></td>
+<td>Width of solid material inside the tooth roots: to the hole for a gear, to the outer edge for a ring gear, to the spokes for a spoked gear. With conical teeth, this is its width on the near face</td>
+</tr>
+<tr>
+<td><strong>Pressure Angle</strong></td>
+<td>Slope of the tooth flanks, 0 to 60. 20 is standard</td>
+</tr>
+<tr>
+<td><strong>Skew Angle</strong></td>
+<td>Twists the teeth along the thickness, like a helical gear</td>
+</tr>
+<tr>
+<td><strong>Conical Angle</strong></td>
+<td>Tapers the teeth towards the far face, like a bevel gear, while the hole (or a ring gear's outer edge) stays straight. -80 to 80</td>
+</tr>
+<tr>
+<td><strong>Bevel</strong></td>
+<td>Rounds the edges of the faces</td>
+</tr>
+</tbody>
+</table>
+<p>For gears to mesh, the teeth need a common size, the <strong>module</strong>: pitch diameter divided by number of teeth
+(<code>2 × Radius / Number Of Teeth</code>). Standard proportions are <strong>Addendum = module</strong> and <strong>Dedendum = 1.25 × module</strong>.
+With a module of 4, a 20-tooth gear has a radius of 40.</p>
+<p>Sizes are measured on the gear's near face, its -Z side. Conical Angle narrows the teeth towards the far, +Z face, so
+the rim between the tooth roots and the hole gets thinner by <code>Thickness × tan(Conical Angle)</code> there; a negative angle
+widens the teeth instead.</p>
+<p><strong>Half Tooth Rotation</strong> turns the teeth by half a tooth, which sometimes lines a gear up with a neighbour by eye. It's
+ignored for driven gears, whose teeth are lined up with their driver automatically.</p>
+<h3 id="spoke-options">Spoke options<a class="headerlink" href="#spoke-options" title="Permanent link">&para;</a></h3>
+<p>These apply to Spokes and Spoked Gear.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hub Radius</strong></td>
+<td>Radius of the hole at the centre of the hub</td>
+</tr>
+<tr>
+<td><strong>Radius</strong></td>
+<td>Outer radius of the hub, where the spokes start</td>
+</tr>
+<tr>
+<td><strong>Thickness</strong></td>
+<td>Depth of the hub and spokes</td>
+</tr>
+<tr>
+<td><strong>Spoke Count</strong></td>
+<td>Number of spokes</td>
+</tr>
+<tr>
+<td><strong>Spoke Width</strong></td>
+<td>Width of each spoke where it meets the hub</td>
+</tr>
+<tr>
+<td><strong>Spoke Length</strong></td>
+<td>Length of each spoke, measured out from the hub. For a spoked gear, <strong>Auto Spoke Length</strong> sizes the spokes to reach the rim instead</td>
+</tr>
+<tr>
+<td><strong>Spoke Taper</strong></td>
+<td>Angle each side of a spoke leans inward; negative values flare outward</td>
+</tr>
+<tr>
+<td><strong>Bevel</strong></td>
+<td>Rounds the edges</td>
+</tr>
+</tbody>
+</table>
+<h3 id="when-a-shape-cant-be-generated">When a shape can't be generated<a class="headerlink" href="#when-a-shape-cant-be-generated" title="Permanent link">&para;</a></h3>
+<p>If the settings can't make a valid shape, for example a hole with a negative radius, the gear shows a <strong>Problems</strong>
+line in the Details panel saying which setting to change, and Map Check lists it as an error. The usual causes:</p>
+<p><img alt="A Problems line for a gear with a Base of zero" src="Images/Problems.png" /></p>
+<ul>
+<li><strong>"Base must be greater than zero"</strong>: with no base, the tooth gaps reach the hole (or a ring gear's outer edge)
+  and the teeth come apart.</li>
+<li><strong>"Radius - Dedendum - Base must be greater than zero"</strong>: the teeth and base leave no room for the hole. Reduce
+  Base or Dedendum, or increase Radius.</li>
+<li><strong>"Base is too small for this ConicalAngle"</strong>: the cone thins the rim towards the far face until it vanishes.
+  Increase Base, or reduce Conical Angle or Thickness.</li>
+<li><strong>"the teeth's tips are too narrow for this many teeth"</strong>: the tooth sides would cross at the tips, usually because
+  Addendum is large for the tooth count. Use standard proportions (Addendum = module), or reduce Pressure Angle.</li>
+<li><strong>"SpokeWidth is too large"</strong>: neighbouring spokes would overlap at the hub. Narrow them or use fewer.</li>
+<li><strong>"SpokeTaper is too large"</strong>: the spokes taper to nothing before their full length.</li>
+</ul>
+<h2 id="making-gears-mesh">Making gears mesh<a class="headerlink" href="#making-gears-mesh" title="Permanent link">&para;</a></h2>
+<p>Two gears mesh when:</p>
+<ul>
+<li>their axes are parallel (they face the same way or opposite ways);</li>
+<li>they have the same module, to within 1%;</li>
+<li>their centres are the right distance apart, to within a tenth of the module: the sum of their radii for two
+  ordinary gears, or the ring's radius minus the pinion's for a gear inside a ring gear;</li>
+<li>they overlap along their axes, so the teeth can touch;</li>
+<li>if their teeth are skewed, the skews match: Skew Angle twists a gear's far face, so a meshing gear needs a skew
+  scaled by the tooth ratio (and thickness), the opposite way for two ordinary gears and the same way for a gear inside
+  a ring gear. The link check tells you the value to use.</li>
+</ul>
+<p>Gears on the same shaft (a compound gear) share an axis and can sit at any depth along it.</p>
+<p>You don't need to line the teeth up. Once gears are linked in a train, each driven gear is turned so its teeth fall
+into its driver's gaps.</p>
+<h2 id="gear-trains">Gear trains<a class="headerlink" href="#gear-trains" title="Permanent link">&para;</a></h2>
+<p>A gear train is a driver and the gears it turns. Every gear has a <strong>Gear Train</strong> section in the Details panel.</p>
+<p><img alt="A gear train with external, same-shaft and internal couplings" src="Images/GearTrain.jpg" /></p>
+<h3 id="drivers">Drivers<a class="headerlink" href="#drivers" title="Permanent link">&para;</a></h3>
+<p>A gear with nothing in <strong>Driven By</strong> is a driver.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rotation Speed</strong></td>
+<td>Revolutions per minute. Positive turns clockwise as seen from the gear's +Z side. 0 holds the train still</td>
+</tr>
+<tr>
+<td><strong>Preview In Editor</strong></td>
+<td>Turn the driver, and everything it drives, in the editor viewport</td>
+</tr>
+<tr>
+<td><strong>Phase Offset</strong></td>
+<td>Extra rotation, in degrees</td>
+</tr>
+</tbody>
+</table>
+<h3 id="driven-gears">Driven gears<a class="headerlink" href="#driven-gears" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driven By</strong></td>
+<td>The gear that turns this one. Pick a gear on this or another actor; picking just an actor uses its root component</td>
+</tr>
+<tr>
+<td><strong>Coupling</strong></td>
+<td>How it connects to its driver (below)</td>
+</tr>
+<tr>
+<td><strong>Phase Offset</strong></td>
+<td>Extra rotation on top of the automatic phase. Leave at 0 unless you want the teeth deliberately out of line</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Coupling</th>
+<th>Use it for</th>
+<th>It turns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>External</strong></td>
+<td>Two ordinary gears with touching teeth</td>
+<td>The opposite way, at driver teeth / driven teeth</td>
+</tr>
+<tr>
+<td><strong>Internal</strong></td>
+<td>A gear inside a ring gear, either driving the other</td>
+<td>The same way, at driver teeth / driven teeth</td>
+</tr>
+<tr>
+<td><strong>Same Shaft</strong></td>
+<td>Gears fixed to one axle, including spokes</td>
+<td>Exactly with its driver</td>
+</tr>
+</tbody>
+</table>
+<p>A driven gear's angle is always worked out from its driver's, never accumulated, so long trains never drift out of
+mesh. If a gear faces the opposite way to its driver, it turns the other way about its own axis, as a real one would.</p>
+<h3 id="linking-gears-automatically">Linking gears automatically<a class="headerlink" href="#linking-gears-automatically" title="Permanent link">&para;</a></h3>
+<p>Select the gears and use <strong>Tools &gt; Gear Generator &gt; Link Meshing Gears</strong>, or the same entry on the right-click menu.
+Starting from the selected gears that have a Rotation Speed (or the first selected gear), it follows every pair that
+is placed to mesh, and sets Driven By and Coupling: External for touching gears, Internal for a gear in a ring gear,
+and Same Shaft for gears on one axle. It reports any selected gears it couldn't reach; check their positions and
+modules.</p>
+<h3 id="checking-links">Checking links<a class="headerlink" href="#checking-links" title="Permanent link">&para;</a></h3>
+<p>Each driven gear checks its link as you edit. A problem appears in the gear's <strong>Problems</strong> line, prefixed
+"Gear train:", and in Map Check. The checks are:</p>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>its axis isn't parallel to its driver's</td>
+<td>Rotate one gear so they face the same or opposite ways</td>
+</tr>
+<tr>
+<td>it isn't on its driver's axle</td>
+<td>For Same Shaft, move it onto the driver's axis</td>
+</tr>
+<tr>
+<td>its module differs from its driver's</td>
+<td>Change Radius or Number Of Teeth so the modules match</td>
+</tr>
+<tr>
+<td>it is X from its driver's centre but should be Y to mesh</td>
+<td>Move it to the distance shown</td>
+</tr>
+<tr>
+<td>it doesn't overlap its driver along their axes</td>
+<td>Move it along its axis until the teeth overlap</td>
+</tr>
+<tr>
+<td>its Skew Angle is X but should be Y</td>
+<td>Set its Skew Angle to the value shown</td>
+</tr>
+<tr>
+<td>a ring gear meshes on the inside; use Internal coupling</td>
+<td>Change Coupling to Internal</td>
+</tr>
+<tr>
+<td>Internal coupling needs one ring gear and one ordinary gear</td>
+<td>Use External, or make one of them a ring gear</td>
+</tr>
+<tr>
+<td>spokes have no teeth to mesh with; use Same Shaft coupling</td>
+<td>Spokes can only share a shaft</td>
+</tr>
+<tr>
+<td>planet gears move around the carrier, so they can't drive other gears</td>
+<td>Drive from the planetary set's sun or ring instead</td>
+</tr>
+<tr>
+<td>Driven By doesn't name another gear</td>
+<td>Pick the driver again; it may have been deleted</td>
+</tr>
+<tr>
+<td>it is driven by a loop of Driven By links</td>
+<td>Break the loop: one gear in it must be a driver</td>
+</tr>
+</tbody>
+</table>
+<p>A gear with a link problem still turns with its driver at the right ratio; only the meshing is wrong.</p>
+<h2 id="planetary-gear-sets">Planetary gear sets<a class="headerlink" href="#planetary-gear-sets" title="Permanent link">&para;</a></h2>
+<p>Place a <strong>Planetary Gear Actor</strong> for a sun gear, planets on a carrier and a ring gear, all meshing.</p>
+<p><img alt="A planetary gear set, with a spokes-only arm on its Carrier socket" src="Images/Planetary.jpg" /></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sun Gear Teeth</strong>, <strong>Planet Gear Teeth</strong></td>
+<td>The ring's teeth follow: sun + 2 × planet</td>
+</tr>
+<tr>
+<td><strong>Number Of Planets</strong></td>
+<td>1 to 32. They're spaced as evenly as their teeth allow</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Tooth size, shared by every gear in the set</td>
+</tr>
+<tr>
+<td><strong>Input Gear</strong></td>
+<td>The member that's driven: Sun, Carrier or Ring</td>
+</tr>
+<tr>
+<td><strong>Fixed Gear</strong></td>
+<td>The member held still</td>
+</tr>
+<tr>
+<td><strong>Rotation Speed</strong></td>
+<td>Speed of the input in revolutions per minute</td>
+</tr>
+<tr>
+<td><strong>Rotate</strong></td>
+<td>Turn the set while playing</td>
+</tr>
+<tr>
+<td><strong>Preview In Editor</strong></td>
+<td>Turn the set in the editor viewport</td>
+</tr>
+<tr>
+<td><strong>Thickness</strong>, <strong>Addendum</strong>, <strong>Dedendum</strong>, <strong>Base</strong>, <strong>Pressure Angle</strong>, <strong>Bevel</strong></td>
+<td>As for gears</td>
+</tr>
+<tr>
+<td><strong>Skew Angle</strong></td>
+<td>Skew of the sun's teeth. The planets and ring are skewed to match automatically</td>
+</tr>
+<tr>
+<td><strong>Sun / Planet / Ring Gear Material</strong></td>
+<td>Materials for each member</td>
+</tr>
+</tbody>
+</table>
+<p>The other members turn at the speeds given by the planetary gear equation. <strong>Get Speeds</strong> returns them, and
+<strong>Solve Speeds</strong> works them out for any tooth counts.</p>
+<p>Ordinary gears can be driven by the set's <strong>sun</strong> or <strong>ring</strong> gear, like any other gear: set their Driven By to the
+SunGear or RingGear component. Planets can't drive other gears, because they travel round the carrier.</p>
+<h2 id="attaching-things-to-gears">Attaching things to gears<a class="headerlink" href="#attaching-things-to-gears" title="Permanent link">&para;</a></h2>
+<p>Only a gear's internal mesh turns, so anything attached to the gear in the usual way stays still. That's useful for
+brackets and housings. To make something turn with a gear, attach it to a socket:</p>
+<ul>
+<li><strong>Gears</strong> have a <strong>Gear</strong> socket that follows the teeth.</li>
+<li><strong>Planetary gear sets</strong> have <strong>Sun</strong>, <strong>Ring</strong> and <strong>Carrier</strong> sockets, and <strong>Planet1</strong> up to the number of planets.
+  A thing on a planet socket spins with the planet and travels round with the carrier.</li>
+</ul>
+<p>In a level, attach an actor to the gear (or planetary set) and choose the socket in the attached actor's
+<strong>Parent Socket</strong> field. In a Blueprint, attach a component to the gear component and set its <strong>Parent Socket</strong>. In
+C++, attach with <code>UGearComponent::GearSocketName</code>, or the names on <code>UPlanetaryGearRootComponent</code>.</p>
+<p>Attached things must have their <strong>Mobility</strong> set to <strong>Movable</strong>, or Unreal won't move them.</p>
+<p>The socket follows the teeth exactly, like a mark painted on the gear. If you move or relink a gear, its teeth are
+re-phased to mesh with the new driver, and anything on its socket turns with them; set attached things' angles last.</p>
+<h2 id="baking">Baking<a class="headerlink" href="#baking" title="Permanent link">&para;</a></h2>
+<p>A gear generates its mesh when it's created. That's convenient while you edit, but costs time when a level loads,
+so for shipping, gears should be <strong>baked</strong>: saved as static mesh assets that load like any other.</p>
+<p><img alt="The Gear Generator section of the Tools menu" src="Images/ToolsMenu.png" /></p>
+<ul>
+<li><strong>Tools &gt; Gear Generator &gt; Bake All Gears in Level</strong> bakes every gear that isn't baked or is out of date.</li>
+<li><strong>Bake Selected Gears</strong>, the right-click <strong>Bake Gears</strong> entry, and the <strong>Bake</strong> button in a gear's Details panel
+  bake just those gears.</li>
+<li><strong>Rebuild Baked Gear Meshes in Level</strong> rebuilds the existing meshes, e.g. after changing the collision or Nanite
+  settings.</li>
+<li><strong>Delete Unused Baked Gear Meshes</strong> finds baked meshes in the bake folder that no saved asset or open level uses,
+  lists them and deletes them once you confirm. Only meshes with baked-mesh names are considered; other assets in
+  the folder are left alone.</li>
+</ul>
+<p>Baked meshes are named after their shape, such as <code>SM_Gear_24T_0123456789ABCDEF</code>. Gears that differ only in size
+share one mesh, scaled to fit. When you change a gear's shape, it generates again until you rebake; the old mesh stays
+until you delete it.</p>
+<p>Baked meshes have lightmap UVs, the collision chosen in the <a href="#project-settings">project settings</a>, and Nanite if
+enabled. The <strong>Collision Profile</strong> on each gear sets how its mesh collides.</p>
+<h3 id="unbaked-gears-at-runtime">Unbaked gears at runtime<a class="headerlink" href="#unbaked-gears-at-runtime" title="Permanent link">&para;</a></h3>
+<p>An unbaked or out-of-date gear still works in a game: it generates its mesh when it loads and logs a warning once per
+shape, <em>"gear mesh generated at runtime"</em>. Generated meshes have no collision shapes. Map Check lists unbaked gears
+with a <strong>Bake</strong> button, and saving a level warns about them (see <strong>On Save Behaviour</strong>).</p>
+<p>Dedicated servers and other builds without rendering never generate meshes. Gear trains still turn there, so game
+logic based on gear angles works.</p>
+<h2 id="project-settings">Project settings<a class="headerlink" href="#project-settings" title="Permanent link">&para;</a></h2>
+<p><strong>Edit &gt; Project Settings &gt; Plugins &gt; Gear Generator</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Generated Asset Path</strong></td>
+<td>Folder for baked meshes. Default <code>/Game/GearGenerator/Meshes</code></td>
+</tr>
+<tr>
+<td><strong>On Save Behaviour</strong></td>
+<td>When a level is saved with unbaked gears: <strong>Warn</strong> lists them in the message log, <strong>Auto Bake</strong> bakes them, <strong>Off</strong> does nothing</td>
+</tr>
+<tr>
+<td><strong>Baked Collision</strong></td>
+<td><strong>Simple</strong>: a cylinder at the tooth roots, or a ring of segments for ring gears; never blocks neighbouring teeth. <strong>Use Complex As Simple</strong>: the gear's own triangles; exact but more expensive, and not usable for simulated physics. <strong>None</strong></td>
+</tr>
+<tr>
+<td><strong>Baked Nanite</strong></td>
+<td><strong>Use Project Setting</strong> follows the project's Nanite setting; or <strong>Enabled</strong> or <strong>Disabled</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Collision and Nanite apply to meshes baked afterwards. Use <strong>Rebuild Baked Gear Meshes in Level</strong> to update existing
+ones.</p>
+<h2 id="blueprint-and-c">Blueprint and C++<a class="headerlink" href="#blueprint-and-c" title="Permanent link">&para;</a></h2>
+<h3 id="gear-component">Gear component<a class="headerlink" href="#gear-component" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Get Shape</strong> / <strong>Set Shape</strong></td>
+<td>Read or change the whole shape</td>
+</tr>
+<tr>
+<td><strong>Set Material</strong>, <strong>Set Half Tooth Rotation</strong></td>
+<td>Appearance</td>
+</tr>
+<tr>
+<td><strong>Get Number Of Teeth</strong>, <strong>Get Module</strong></td>
+<td>Tooth count (or spoke count), and module</td>
+</tr>
+<tr>
+<td><strong>Get Problems</strong></td>
+<td>Generation problems as text; empty when the shape is valid</td>
+</tr>
+<tr>
+<td><strong>Update Mesh</strong></td>
+<td>Regenerate or re-apply the mesh now</td>
+</tr>
+<tr>
+<td><strong>Get Mesh ETag</strong>, <strong>Is Baked Mesh Current</strong></td>
+<td>The shape's mesh identifier, and whether the baked mesh matches it</td>
+</tr>
+<tr>
+<td><strong>Get Rotation Speed</strong> / <strong>Set Rotation Speed</strong></td>
+<td>A driver's speed in RPM</td>
+</tr>
+<tr>
+<td><strong>Set Drive Angle</strong></td>
+<td>Turn a driver to an angle; everything it drives follows. Works in BeginPlay</td>
+</tr>
+<tr>
+<td><strong>Get Gear Angle</strong></td>
+<td>How far the gear has turned about its own axis</td>
+</tr>
+<tr>
+<td><strong>Get Driver</strong>, <strong>Set Driven By</strong>, <strong>Get Coupling</strong></td>
+<td>Read or change links at runtime</td>
+</tr>
+<tr>
+<td><strong>Get Train Driver</strong></td>
+<td>The gear at the top of this gear's train, whose speed and drive angle turn it. Itself if nothing drives it</td>
+</tr>
+</tbody>
+</table>
+<p>For example, to start a clock at the current time, call <strong>Set Drive Angle</strong> on its seconds driver in BeginPlay with
+<code>((Hour % 12) × 3600 + Minute × 60 + Second) × 6</code>. The Showcase's Level Blueprint does exactly this.</p>
+<p>To let a player crank a mechanism by grabbing any of its gears, call <strong>Get Train Driver</strong> on the gear they grabbed and
+<strong>Set Rotation Speed</strong> or <strong>Set Drive Angle</strong> on the result.</p>
+<h3 id="planetary-gear-actor">Planetary gear actor<a class="headerlink" href="#planetary-gear-actor" title="Permanent link">&para;</a></h3>
+<p><strong>Get Sun Gear</strong>, <strong>Get Ring Gear</strong>, <strong>Get Planet Gears</strong> and <strong>Get Carrier</strong> return the members. <strong>Get Speeds</strong>,
+<strong>Solve Speeds</strong>, <strong>Get Planet Placement</strong>, <strong>Get Ring Gear Teeth</strong> and <strong>Get Pitch Radius</strong> do the maths.</p>
+<h3 id="geometry-script">Geometry Script<a class="headerlink" href="#geometry-script" title="Permanent link">&para;</a></h3>
+<p>For your own dynamic meshes, the <strong>Gear Generator</strong> Geometry Script category has <strong>Append Gear</strong>, <strong>Append Ring
+Gear</strong>, <strong>Append Spokes</strong> and <strong>Append Gear Shape</strong>, plus <strong>Create ETag</strong>, which identifies a shape's mesh. They work
+in Blueprints and Editor Utility Widgets like any other Geometry Script function.</p>
+<h3 id="c">C++<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>Add <code>GearGenerator</code> to your module's dependencies. The main classes are <code>UGearComponent</code>, <code>AGearActor</code>,
+<code>APlanetaryGearActor</code> and <code>UGearTrainSubsystem</code> (a world subsystem that turns every train). <code>UGearComponent::OnMeshUpdated()</code>
+is broadcast after a gear's mesh changes.</p>
+<h2 id="the-gear-material">The gear material<a class="headerlink" href="#the-gear-material" title="Permanent link">&para;</a></h2>
+<p>The plugin's gears use <strong>M_Gear</strong> (<code>/GearGenerator/Material</code>), an aged-metal material with these instances:
+<strong>MI_MetalBrass</strong>, <strong>MI_MetalBronze</strong>, <strong>MI_MetalCopper</strong>, <strong>MI_MetalSteel</strong> and <strong>MI_MetalBluedSteel</strong>. Make your
+own instance of M_Gear to change any of these parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base Color</strong>, <strong>Metallic</strong>, <strong>Roughness</strong></td>
+<td>The clean surface</td>
+</tr>
+<tr>
+<td><strong>Tarnish</strong></td>
+<td>How much of the surface is tarnished, 0 to 1</td>
+</tr>
+<tr>
+<td><strong>Tarnish Darken</strong></td>
+<td>Colour multiplier in tarnished patches</td>
+</tr>
+<tr>
+<td><strong>Tarnish Roughness</strong></td>
+<td>Extra roughness in tarnished patches</td>
+</tr>
+<tr>
+<td><strong>Patina</strong></td>
+<td>Tints tarnished patches with <strong>Patina Color</strong> and makes them less metallic, for copper and bronze</td>
+</tr>
+<tr>
+<td><strong>Variation</strong></td>
+<td>Broad colour variation across the surface</td>
+</tr>
+<tr>
+<td><strong>Grain</strong></td>
+<td>Streaks, for wood</td>
+</tr>
+<tr>
+<td><strong>Noise Tiling</strong></td>
+<td>How many times the noise repeats across a gear</td>
+</tr>
+<tr>
+<td><strong>Noise</strong></td>
+<td>The noise texture: red for fine speckle, green for broad patches, blue for streaks</td>
+</tr>
+</tbody>
+</table>
+<p>The noise uses the mesh's UVs, which are laid out evenly across a gear's faces and walls, so the pattern turns with
+the gear. Any material works on gears; set it with the gear's <strong>Material</strong> setting.</p>
+<h2 id="the-showcase-map">The Showcase map<a class="headerlink" href="#the-showcase-map" title="Permanent link">&para;</a></h2>
+<p>Open <strong>/GearGenerator/Maps/Showcase</strong>. In the Content Browser, enable <strong>Settings &gt; Show Plugin Content</strong> to see the
+plugin's folders. It has:</p>
+<ul>
+<li><strong>Skeleton clock</strong>: an eight-gear train turns the seconds, minute and hour hands, which are attached to Gear
+  sockets. The Level Blueprint starts it at the current time; it then runs at 60 times normal speed. Set the seconds pinion's
+  Rotation Speed to 1 for real time.</li>
+<li><strong>Planetary gear set</strong>: the sun drives and the ring is fixed. A spokes-only arm on the Carrier socket turns with the
+  carrier.</li>
+<li><strong>Gear train</strong>: external, same-shaft and internal couplings.</li>
+<li><strong>Shapes and styles</strong>: one of each shape and style.</li>
+</ul>
+<p>Each station has a camera, and Play starts in front of the clock with a free-flying camera.</p>
+<h2 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h2>
+<p>The plugin is built and tested for <strong>Win64</strong> and <strong>Android</strong>. The runtime has no platform-specific code, so for other
+platforms (Linux, including dedicated servers, Mac or iOS), add the platform to the <strong>PlatformAllowList</strong> of the
+<code>GearGenerator</code> module in <code>GearGenerator.uplugin</code> and build the plugin from source. The editor module is for Windows.</p>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Moving or relinking a gear re-phases its teeth.</strong> Anything on its socket turns with them, so set attached things'
+  angles after the gears are in place.</li>
+<li><strong>Deleting a driver's actor quietly unlinks the gears it drove.</strong> Their Driven By empties, so they become drivers
+  with no speed and stop, with no warning. Pick a new driver for them.</li>
+<li><strong>Generated (unbaked) meshes have no collision.</strong> Bake gears that need collision.</li>
+<li><strong>Gear teeth are for looks.</strong> Gears don't push each other physically; trains are turned by the gear train
+  subsystem.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>A gear is invisible.</strong> Check its <strong>Problems</strong> line: the shape may be invalid. Also check the gear's <strong>Visible</strong> and
+<strong>Hidden In Game</strong> settings, which apply to its mesh.</p>
+<p><strong>Two gears clash or turn the wrong way.</strong> Make sure the driven gear's Coupling matches how they meet, and look for a
+Gear train problem in its Problems line or Map Check.</p>
+<p><strong>Something attached to a gear doesn't turn.</strong> Attach it to the <strong>Gear</strong> socket (not just the gear), and set its
+Mobility to Movable.</p>
+<p><strong>"gear mesh generated at runtime" in the log.</strong> A gear wasn't baked, or its shape changed after baking. Use <strong>Bake
+All Gears in Level</strong> and save.</p>
+<p><strong>A baked gear looks wrong after updating the plugin.</strong> Use <strong>Rebuild Baked Gear Meshes in Level</strong>.</p>
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<p>Report bugs and ask questions on the <a href="https://github.com/TechnoMyth/gear-generator/issues">issue tracker</a>. Please include your Unreal Engine version and, for
+a gear that won't generate or mesh, its <strong>Problems</strong> line. The latest version of this guide is at
+<a href="https://docs.technomyth.com/gear-generator/unreal/">docs.technomyth.com/gear-generator/unreal/</a>.</p>
+<h2 id="version-history">Version history<a class="headerlink" href="#version-history" title="Permanent link">&para;</a></h2>
+<p><strong>1.0</strong>: first release.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright TechnoMyth
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "toc.follow", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
